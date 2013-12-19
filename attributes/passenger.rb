@@ -32,12 +32,14 @@ else
   node.default["nginx"]["passenger"]["ruby"] = "/usr/bin/ruby"
 end
 
-node.default["nginx"]["passenger"]["spawn_method"] = "smart-lv2"
-node.default["nginx"]["passenger"]["use_global_queue"] = "on"
-node.default["nginx"]["passenger"]["buffer_response"] = "on"
-node.default["nginx"]["passenger"]["max_pool_size"] = 6
-node.default["nginx"]["passenger"]["min_instances"] = 1
-node.default["nginx"]["passenger"]["max_instances_per_app"] = 0
-node.default["nginx"]["passenger"]["pool_idle_time"] = 300
-node.default["nginx"]["passenger"]["max_requests"] = 0
-node.default["nginx"]["passenger"]["gem_binary"] = nil
+node.default['nginx']['passenger']['packages']['rhel'] = %w[ruby-devel curl-devel]
+node.default['nginx']['passenger']['packages']['debian'] = %w[ruby-dev libcurl4-gnutls-dev]
+
+node.default['nginx']['passenger']['spawn_method'] = 'smart-lv2'
+node.default['nginx']['passenger']['buffer_response'] = 'on'
+node.default['nginx']['passenger']['max_pool_size'] = 6
+node.default['nginx']['passenger']['min_instances'] = 1
+node.default['nginx']['passenger']['max_instances_per_app'] = 0
+node.default['nginx']['passenger']['pool_idle_time'] = 300
+node.default['nginx']['passenger']['max_requests'] = 0
+node.default['nginx']['passenger']['gem_binary'] = nil
