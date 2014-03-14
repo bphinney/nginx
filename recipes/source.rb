@@ -45,14 +45,14 @@ include_recipe "nginx::commons_script"
 include_recipe "build-essential"
 
 src_filepath  = "#{Chef::Config['file_cache_path'] || '/tmp'}/nginx-#{node['nginx']['source']['version']}.tar.gz"
-packages = value_for_platform(
-    ["centos","redhat","fedora","amazon","scientific"] => {'default' => ['pcre-devel', 'openssl-devel']},
-    "gentoo" => {"default" => []},
-    "default" => ['libpcre3', 'libpcre3-dev', 'libssl-dev']
-  )
+packages = value_for_platform_family(
+  %w(rhel fedora) => %w(pcre-devel openssl-devel),
+  %w(gentoo)      => [],
+  %w(default)     => %w(libpcre3 libpcre3-dev libssl-dev)
+)
 
-packages.each do |devpkg|
-  package devpkg
+packages.each do |name|
+  package name
 end
 
 remote_file nginx_url do

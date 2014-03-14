@@ -62,21 +62,21 @@ default['nginx']['gzip_comp_level']   = '2'
 default['nginx']['gzip_proxied']      = 'any'
 default['nginx']['gzip_vary']         = 'off'
 default['nginx']['gzip_buffers']      = nil
-default['nginx']['gzip_types']        = [
-  "text/plain",
-  "text/css",
-  "application/x-javascript",
-  "text/xml",
-  "application/xml",
-  "application/rss+xml",
-  "application/atom+xml",
-  "text/javascript",
-  "application/javascript",
-  "application/json",
-  "text/mathml"
-]
-default['nginx']['gzip_min_length']   = 1000
-default['nginx']['gzip_disable']      = "MSIE [1-6]\."
+default['nginx']['gzip_types'] = %w(
+  text/plain
+  text/css
+  application/x-javascript
+  text/xml
+  application/xml
+  application/rss+xml
+  application/atom+xml
+  text/javascript
+  application/javascript
+  application/json
+  text/mathml
+)
+default['nginx']['gzip_min_length']   = 1_000
+default['nginx']['gzip_disable']      = 'MSIE [1-6]\.'
 
 default['nginx']['keepalive']          = "on"
 default['nginx']['keepalive_timeout']  = 65

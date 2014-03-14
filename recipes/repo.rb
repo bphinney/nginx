@@ -32,8 +32,8 @@ when 'debian'
   apt_repository "nginx" do
     uri node['nginx']['upstream_repository']
     distribution node['lsb']['codename']
-    components ["nginx"]
-    deb_src true
-    key 'http://nginx.org/keys/nginx_signing.key'
+    components   %w(nginx)
+    deb_src      true
+    key          'http://nginx.org/keys/nginx_signing.key'
   end
 end
