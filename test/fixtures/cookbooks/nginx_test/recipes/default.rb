@@ -1,9 +1,8 @@
 #
-# Cookbook Name:: nginx
-# Recipe:: common/conf
-# Author:: AJ Christensen <aj@junglist.gen.nz>
+# Cookbook Name:: nginx_test
+# Recipe:: default
 #
-# Copyright 2008-2012, Opscode, Inc.
+# Copyright 2014, TangoGroup
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +16,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-template "nginx.conf" do
-  path "#{node['nginx']['dir']}/nginx.conf"
-  source "nginx.conf.erb"
-  owner "root"
-  group "root"
-  mode 00644
-  notifies :reload, 'service[nginx]'
-end
-
-nginx_site 'default' do
-  enable node['nginx']['default_site_enabled']
-end

@@ -30,18 +30,23 @@ default['nginx']['script_dir']   = '/usr/sbin'
 default['nginx']['log_dir']      = '/var/log/nginx'
 default['nginx']['binary']       = '/usr/sbin/nginx'
 default['nginx']['default_root'] = '/var/www/nginx-default'
+default['nginx']['root_group']   = 'root'
 
-case node['platform']
-when "debian","ubuntu"
-  default['nginx']['user']       = "www-data"
-  default['nginx']['init_style'] = "runit"
-when "redhat","centos","scientific","amazon","oracle","fedora"
-  default['nginx']['user']       = "nginx"
-  default['nginx']['init_style'] = "init"
-  default['nginx']['repo_source'] = "epel"
-when "gentoo"
-  default['nginx']['user']       = "nginx"
-  default['nginx']['init_style'] = "init"
+case node['platform_family']
+when 'debian'
+  default['nginx']['user']       = 'www-data'
+  default['nginx']['init_style'] = 'runit'
+when 'rhel', 'fedora'
+  default['nginx']['user']        = 'nginx'
+  default['nginx']['init_style']  = 'init'
+  default['nginx']['repo_source'] = 'epel'
+when 'gentoo'
+  default['nginx']['user']       = 'nginx'
+  default['nginx']['init_style'] = 'init'
+when 'freebsd'
+  default['nginx']['user']       = 'www'
+  default['nginx']['init_style'] = 'init'
+  default['nginx']['root_group'] = 'wheel'
 else
   default['nginx']['user']       = "www-data"
   default['nginx']['init_style'] = "init"
