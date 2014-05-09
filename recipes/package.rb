@@ -33,7 +33,7 @@ when 'redhat','centos','scientific','amazon','oracle'
   else
     fail ArgumentError, "Unknown value '#{node['nginx']['repo_source']}' was passed to the nginx cookbook."
   end
-elsif platform_family?('debian')
+when platform_family?('debian')
   include_recipe 'nginx::repo' if node['nginx']['repo_source'] == 'nginx'
 end
 
